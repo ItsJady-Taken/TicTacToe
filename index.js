@@ -48,8 +48,23 @@ const DisplayController =( function() {
     ];
     const cellClick = (cell) => {
         const index = cell.target.getAttribute('data-index');
+        if(!gameActive || !gameBoard.update(index, currentPlayer.marker)){return;}// make sure player can't over write marker
+        
         cell.target.textContent = currentPlayer.marker;
-        switchPlayer()
+        if(winner()){
+            console.log(currentPlayer.name)
+        }
+        else{
+            switchPlayer();
+        }
+        
+    }
+    const winner = () => {
+        return winCombinations.some((combination)=>{
+            return combination.every((index)=>{
+                return gameBoard.getBoard()[index] === currentPlayer.marker;    
+            })  
+        })
     }
 
     const switchPlayer = () => {
@@ -62,7 +77,7 @@ const DisplayController =( function() {
     }
 
     cells.forEach((cell)=>{
-        cell.addEventListener('click', cellClick)
+        cell.addEventListener('click', cellClick);
     })
 })();
 
