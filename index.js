@@ -51,11 +51,12 @@ const DisplayController =( function() {
     const CreatePlayer = () => {
         const user1_name = document.getElementById('user1-name').value;
         const user2_name = document.getElementById('user2-name').value;
-        
+
         player1 = player(user1_name, 'X');
         player2 = player(user2_name, 'O');
         currentPlayer = player1
         gameActive = true;
+        
     }
 
     const cellClick = (cell) => {
@@ -99,9 +100,14 @@ const DisplayController =( function() {
             cell.textContent = '';
         })
         output.textContent = '';
-        gameActive = true
         currentPlayer = player1
-     
+        if(player1 == null && player2 == null){
+            gameActive == false;
+        }
+        else {
+             gameActive = true;
+        }
+       
     }
 
     cells.forEach((cell)=>{
@@ -109,10 +115,12 @@ const DisplayController =( function() {
     })
     restard_btn.addEventListener('click', RestardGame);
     player_form.addEventListener('submit', (event) =>{
+        
         event.preventDefault(); 
         CreatePlayer();
+        
         player_form.reset();
     })
-
+    
 })();
 
