@@ -49,6 +49,7 @@ const DisplayController =( function() {
         [2, 4, 6]
     ];
     const CreatePlayer = () => {
+        RestardGame();
         const user1_name = document.getElementById('user1-name').value;
         const user2_name = document.getElementById('user2-name').value;
 
